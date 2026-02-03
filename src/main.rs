@@ -4,39 +4,24 @@ mod data;
 mod format;
 
 use anyhow::Result;
-use clap::{Parser, Subcommand, ValueEnum};
+use clap::{Parser, Subcommand};
 use std::io::{self, ErrorKind};
-
-#[derive(Debug, Clone, ValueEnum)]
-enum Namespace {
-    Lib,
-    Builtins,
-    Pkgs,
-}
-
-impl Namespace {
-    fn as_str(&self) -> &str {
-        match self {
-            Namespace::Lib => "lib",
-            Namespace::Builtins => "builtins",
-            Namespace::Pkgs => "pkgs",
-        }
-    }
-}
 
 #[derive(Parser)]
 #[command(name = "noogle-search")]
 #[command(about = "Search Noogle functions for television/fzf")]
 struct Cli {
+    #[arg(short = 'f', long = "filter")]
+    filter: Option<String>,
+
+    query: Option<String>,
+
     #[command(subcommand)]
     command: Option<Commands>,
 }
 
 #[derive(Subcommand)]
 enum Commands {
-    Filter {
-        namespace: Namespace,
-    },
     Print {
         #[arg(long)]
         filter: Option<String>,
@@ -74,9 +59,6 @@ fn run() -> Result<()> {
     let cli = Cli::parse();
 
     match cli.command {
-        Some(Commands::Filter { namespace }) => {
-            commands::search::execute(Some(namespace.as_str().to_string()))?;
-        }
         Some(Commands::Print { filter }) => {
             let response = cache::load_data()?;
             commands::print::execute(&response, filter.as_deref());
@@ -94,7 +76,7 @@ fn run() -> Result<()> {
             commands::open_noogle::execute(&response, &name)?;
         }
         None => {
-            commands::search::execute(None)?;
+            commands::search::execute(cli.filter, cli.query)?;
         }
     }
 
