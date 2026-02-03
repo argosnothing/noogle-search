@@ -25,7 +25,7 @@ Add to your `flake.nix`:
   outputs = { self, nixpkgs, noogle-search-tv }: {
     # In your NixOS configuration or home-manager
     environment.systemPackages = [
-      noogle-search-tv.packages.${system}.default
+      noogle-search-tv.packages.${system}.noogle-search
     ];
   };
 }
@@ -34,7 +34,7 @@ Add to your `flake.nix`:
 Or run directly:
 
 ```bash
-nix run github:YOUR_USERNAME/noogle-search-tv
+nix run github:argosnothing/noogle-search-tv
 ```
 
 ### Building from source
