@@ -22,6 +22,7 @@ pub fn find_doc<'a>(response: &'a NoogleResponse, input: &str) -> Result<&'a Doc
     response
         .data
         .iter()
-        .find(|d| d.matches_name(&full_name))
+        .find(|d| d.meta.title == full_name)
+        .or_else(|| response.data.iter().find(|d| d.matches_name(&full_name)))
         .ok_or_else(|| anyhow!("Function '{}' not found", full_name))
 }
