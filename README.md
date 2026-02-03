@@ -19,13 +19,13 @@ Add to your `flake.nix`:
 ```nix
 {
   inputs = {
-    noogle-search-tv.url = "github:argosnothing/noogle-search-tv";
+    noogle-search.url = "github:argosnothing/noogle-search";
   };
 
   outputs = { self, nixpkgs, noogle-search-tv }: {
     # In your NixOS configuration or home-manager
     environment.systemPackages = [
-      noogle-search-tv.packages.${system}.default
+      noogle-search.packages.${system}.default
     ];
   };
 }
@@ -34,7 +34,7 @@ Add to your `flake.nix`:
 Or run directly:
 
 ```bash
-nix run github:YOUR_USERNAME/noogle-search-tv
+nix run github:argosnothing/noogle-search
 ```
 
 ### Building from source
@@ -47,7 +47,7 @@ nix build
 ## Usage
 
 ```bash
-noogle-search-tv search
+noogle-search
 ```
 
 ### Keybinds
@@ -70,6 +70,7 @@ When you select a function like `lib.strings.optionalString`, you'll see:
 ## Credits
 
 Data provided by [Noogle.dev](https://noogle.dev) - the Nix function search engine by [@hsjobeki](https://github.com/hsjobeki).
+The clankers who did most of the work.
 
 ## Dependencies
 
