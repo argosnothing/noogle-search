@@ -82,7 +82,7 @@ When you apply a namespace filter:
 - Functions are matched by their primary title, not aliases from other namespaces
 
 ### Notes for impermanence.
-`noogle-search` uses a cache to avoid excessive calls to noogle on a 24h timer in `~/.cache/noogle-search-tv`
+`noogle-search` uses a cache to avoid excessive calls to noogle on a 24h timer in `~/.cache/noogle-search`
 
 ## Credits
 
