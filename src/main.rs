@@ -24,7 +24,9 @@ enum Commands {
     Preview {
         name: String,
     },
-    Search,
+    Search {
+        filter: Option<String>,
+    },
     OpenSource {
         name: String,
     },
@@ -55,8 +57,8 @@ fn run() -> Result<()> {
     let cli = Cli::parse();
 
     match cli.command {
-        Commands::Search => {
-            commands::search::execute()?;
+        Commands::Search { filter } => {
+            commands::search::execute(filter)?;
         }
         _ => {
             let response = cache::load_data()?;
@@ -74,7 +76,7 @@ fn run() -> Result<()> {
                 Commands::OpenNoogle { name } => {
                     commands::open_noogle::execute(&response, &name)?;
                 }
-                Commands::Search => unreachable!(),
+                Commands::Search { .. } => unreachable!(),
             }
         }
     }

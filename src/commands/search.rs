@@ -2,8 +2,14 @@ use anyhow::Result;
 use std::process::Command;
 use std::env;
 
-pub fn execute() -> Result<()> {
+pub fn execute(initial_filter: Option<String>) -> Result<()> {
     let exe_path = env::current_exe()?;
+    
+    let initial_cmd = if let Some(filter) = &initial_filter {
+        format!("{} print --filter {}", exe_path.display(), filter)
+    } else {
+        format!("{} print", exe_path.display())
+    };
     
     let mut child = Command::new("fzf")
         .args(&[
@@ -29,8 +35,9 @@ pub fn execute() -> Result<()> {
             "--header",
             "Ctrl-L: lib | Ctrl-B: builtins | Ctrl-P: pkgs | Ctrl-A: all\nCtrl-O: source | Ctrl-N: noogle | Ctrl-/: preview",
         ])
-        .stdin(Command::new(&exe_path)
-            .arg("print")
+        .stdin(Command::new("sh")
+            .arg("-c")
+            .arg(&initial_cmd)
             .stdout(std::process::Stdio::piped())
             .spawn()?
             .stdout
