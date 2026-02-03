@@ -69,7 +69,8 @@ When you select a function like `lib.strings.optionalString`, you'll see:
 
 ## Credits
 
-- Data provided by [Noogle.dev](https://noogle.dev) - the Nix function search engine by [@hsjobeki](https://github.com/hsjobeki).
+- Data provided by [Noogle.dev](https://noogle.dev) 
+- the Nix function search engine by [@hsjobeki](https://github.com/hsjobeki). 
 - The clankers who did most of the work.
 
 ## Dependencies
