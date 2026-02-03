@@ -132,5 +132,21 @@ fn print_content(text: &str) {
 }
 
 fn strip_inline_code(text: &str) -> String {
-    text.replace('`', "")
+    unescape_markdown(&text.replace('`', ""))
+}
+
+fn unescape_markdown(text: &str) -> String {
+    text.replace(r"\.", ".")
+        .replace(r"\-", "-")
+        .replace(r"\*", "*")
+        .replace(r"\_", "_")
+        .replace(r"\#", "#")
+        .replace(r"\[", "[")
+        .replace(r"\]", "]")
+        .replace(r"\(", "(")
+        .replace(r"\)", ")")
+        .replace(r"\{", "{")
+        .replace(r"\}", "}")
+        .replace(r"\|", "|")
+        .replace(r"\\", "\\")
 }
