@@ -13,6 +13,8 @@ pub fn execute() -> Result<()> {
             "--scheme=history",
             "--bind",
             &format!("ctrl-o:execute({} open-source {{}})", exe_path.display()),
+            "--header",
+            "Ctrl-O: Open source | Ctrl-/: Toggle preview",
         ])
         .stdin(Command::new(&exe_path)
             .arg("print")
