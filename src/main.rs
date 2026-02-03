@@ -21,6 +21,7 @@ enum Commands {
     Preview { name: String },
     Search,
     OpenSource { name: String },
+    OpenNoogle { name: String },
 }
 
 fn main() -> Result<()> {
@@ -60,6 +61,9 @@ fn run() -> Result<()> {
                 }
                 Commands::OpenSource { name } => {
                     commands::open_source::execute(&response, &name)?;
+                }
+                Commands::OpenNoogle { name } => {
+                    commands::open_noogle::execute(&response, &name)?;
                 }
                 Commands::Search => unreachable!(),
             }
