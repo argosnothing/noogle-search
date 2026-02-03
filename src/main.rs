@@ -26,9 +26,9 @@ fn main() -> Result<()> {
     unsafe {
         libc::signal(libc::SIGPIPE, libc::SIG_DFL);
     }
-    
+
     let result = run();
-    
+
     if let Err(e) = &result {
         if let Some(io_err) = e.downcast_ref::<io::Error>() {
             if io_err.kind() == ErrorKind::BrokenPipe {
@@ -36,20 +36,20 @@ fn main() -> Result<()> {
             }
         }
     }
-    
+
     result
 }
 
 fn run() -> Result<()> {
     let cli = Cli::parse();
-    
+
     match cli.command {
         Commands::Search => {
             commands::search::execute()?;
         }
         _ => {
             let response = cache::load_data()?;
-            
+
             match cli.command {
                 Commands::Print => {
                     commands::print::execute(&response);
@@ -61,6 +61,6 @@ fn run() -> Result<()> {
             }
         }
     }
-    
+
     Ok(())
 }
