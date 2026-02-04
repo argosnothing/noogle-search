@@ -1,5 +1,18 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Copyright (C) 2026 argos_nothing
+// Copyright (C) 2026 argos_nothing <argosnothing@gmail.com>
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 mod cache;
 mod commands;
@@ -60,6 +73,20 @@ fn main() -> Result<()> {
 
 fn run() -> Result<()> {
     let cli = Cli::parse();
+
+    // Show GPL disclaimer only once, first time any command is run
+    if cache::should_show_disclaimer()? {
+        eprintln!("noogle-search  Copyright (C) 2026  argos_nothing");
+        eprintln!("This program comes with ABSOLUTELY NO WARRANTY.");
+        eprintln!("This is free software, and you are welcome to redistribute it");
+        eprintln!("under certain conditions. See LICENSE for details.");
+        eprintln!("\nPress Enter to continue...");
+        
+        let mut input = String::new();
+        std::io::stdin().read_line(&mut input)?;
+        
+        cache::mark_disclaimer_shown()?;
+    }
 
     match cli.command {
         Some(Commands::Print { filter }) => {

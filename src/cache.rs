@@ -1,5 +1,18 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Copyright (C) 2026 argos_nothing
+// Copyright (C) 2026 argos_nothing <argosnothing@gmail.com>
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 use anyhow::{Context, Result};
 use chrono::{DateTime, Duration, Utc};
@@ -13,6 +26,7 @@ const API_URL: &str = "https://noogle.dev/api/v1/data";
 const CACHE_DIR_NAME: &str = "noogle-search";
 const DATA_FILE: &str = "data.json";
 const METADATA_FILE: &str = "metadata.json";
+const DISCLAIMER_FLAG: &str = ".disclaimer_shown";
 const TTL_HOURS: i64 = 24;
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -74,3 +88,19 @@ fn get_cache_dir() -> Result<PathBuf> {
     let cache_base = dirs::cache_dir().context("Could not determine cache directory")?;
     Ok(cache_base.join(CACHE_DIR_NAME))
 }
+
+pub fn should_show_disclaimer() -> Result<bool> {
+    let cache_dir = get_cache_dir()?;
+    fs::create_dir_all(&cache_dir)?;
+    let flag_path = cache_dir.join(DISCLAIMER_FLAG);
+    Ok(!flag_path.exists())
+}
+
+pub fn mark_disclaimer_shown() -> Result<()> {
+    let cache_dir = get_cache_dir()?;
+    fs::create_dir_all(&cache_dir)?;
+    let flag_path = cache_dir.join(DISCLAIMER_FLAG);
+    fs::write(flag_path, "")?;
+    Ok(())
+}
+

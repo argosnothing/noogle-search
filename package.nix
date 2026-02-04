@@ -39,7 +39,7 @@ rustPlatform.buildRustPackage rec {
   meta = {
     description = "Search Noogle functions with fzf";
     homepage = "https://github.com/argosnothing/noogle-search";
-    license = lib.licenses.gpl3;
+    license = lib.licenses.gpl3Plus;
     mainProgram = "noogle-search";
     maintainers = with lib.maintainers; [argos_nothing];
   };
