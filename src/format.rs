@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+// Copyright (C) 2026 argos_nothing
+
 use crate::data::Doc;
 use owo_colors::OwoColorize;
 use std::io::Write;

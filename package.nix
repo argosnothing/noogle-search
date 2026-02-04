@@ -16,10 +16,10 @@ rustPlatform.buildRustPackage rec {
     owner = "argosnothing";
     repo = "noogle-search";
     rev = "v${version}";
-    hash = lib.fakeHash;
+    hash = "sha256-1CfhNzxG+JK8+9IeB7NMNnTwGDnJ4Rx39WInoPwfPfA=";
   };
 
-  cargoHash = "sha256-Pb+/zgDCMNbt8N0BNE1F6+/TMzu3pfgUPrcnwJUEcEw=";
+  cargoHash = "sha256-axqFE5ZEiVP8PzFTtW5mbyyYcR4q9g3LX/0i6y+cgy8=";
 
   nativeBuildInputs = [
     makeWrapper
@@ -38,8 +38,8 @@ rustPlatform.buildRustPackage rec {
   meta = {
     description = "Search Noogle functions with fzf";
     homepage = "https://github.com/argosnothing/noogle-search";
-    license = lib.licenses.mit; # Update with actual license
+    license = lib.licenses.gpl3;
     mainProgram = "noogle-search";
-    maintainers = with lib.maintainers; []; # Add maintainer(s)
+    maintainers = with lib.maintainers; [argos_nothing];
   };
 }

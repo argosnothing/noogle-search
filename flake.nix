@@ -18,36 +18,7 @@
         pkgs = nixpkgs.legacyPackages.${system};
       in
       {
-        packages.default = pkgs.rustPlatform.buildRustPackage {
-          pname = "noogle-search";
-          version = "0.2.0";
-          src = ./.;
-
-          cargoLock = {
-            lockFile = ./Cargo.lock;
-          };
-
-          nativeBuildInputs = [
-            pkgs.makeWrapper
-            pkgs.pkg-config
-          ];
-          buildInputs = [ pkgs.openssl.dev ];
-
-          postInstall = ''
-            wrapProgram $out/bin/noogle-search \
-              --prefix PATH : ${
-                pkgs.lib.makeBinPath [
-                  pkgs.bat
-                  pkgs.fzf
-                ]
-              }
-          '';
-
-          meta = {
-            description = "Search Noogle functions with fzf";
-            mainProgram = "noogle-search";
-          };
-        };
+        packages.default = pkgs.callPackage ./package.nix { };
 
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [

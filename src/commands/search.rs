@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+// Copyright (C) 2026 argos_nothing
+
 use anyhow::Result;
 use std::env;
 use std::process::Command;
