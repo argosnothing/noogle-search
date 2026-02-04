@@ -2,7 +2,7 @@ use anyhow::Result;
 use std::env;
 use std::process::Command;
 
-pub fn execute(initial_filtr: Option<String>, initial_query: Option<String>) -> Result<()> {
+pub fn execute(initial_filter: Option<String>, initial_query: Option<String>) -> Result<()> {
     let exe_path = env::current_exe()?;
 
     let initial_cmd = if let Some(filter) = &initial_filter {
