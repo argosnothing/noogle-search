@@ -14,7 +14,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
   version = "0.2.0";
 
   src = fetchFromGitHub {
-    owner = "argosnothing";
+    owner = "argos_nothing";
     repo = "noogle-search";
     rev = "v${finalAttrs.version}";
     hash = "sha256-Gc/+twc9XFIZaZ2wDoqc1AS0nPgpDXS32NUuX2dlAKY=";
