@@ -9,14 +9,14 @@
   fzf,
   xdg-utils,
 }:
-rustPlatform.buildRustPackage rec {
+rustPlatform.buildRustPackage (finalAttrs: {
   pname = "noogle-search";
   version = "0.2.0";
 
   src = fetchFromGitHub {
     owner = "argosnothing";
     repo = "noogle-search";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-Gc/+twc9XFIZaZ2wDoqc1AS0nPgpDXS32NUuX2dlAKY=";
   };
 
@@ -43,4 +43,4 @@ rustPlatform.buildRustPackage rec {
     mainProgram = "noogle-search";
     maintainers = with lib.maintainers; [argos_nothing];
   };
-}
+})
