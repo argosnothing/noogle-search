@@ -13,13 +13,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
   pname = "noogle-search";
   version = "0.2.0";
 
-  src = fetchFromGitHub {
-    owner = "argosnothing";
-    repo = "noogle-search";
-    rev = "v${finalAttrs.version}";
-    hash = "sha256-yWGvprpIph+890OoRgb7vRo2/HpK3EPPoQwPdduhT6U=";
-  };
-
+  src = ./.;
   cargoHash = "sha256-axqFE5ZEiVP8PzFTtW5mbyyYcR4q9g3LX/0i6y+cgy8=";
 
   nativeBuildInputs = [
