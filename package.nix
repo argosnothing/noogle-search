@@ -14,10 +14,10 @@ rustPlatform.buildRustPackage (finalAttrs: {
   version = "0.2.0";
 
   src = fetchFromGitHub {
-    owner = "argos_nothing";
+    owner = "argosnothing";
     repo = "noogle-search";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-Gc/+twc9XFIZaZ2wDoqc1AS0nPgpDXS32NUuX2dlAKY=";
+    hash = "sha256-cfTJf/j9xP/lQ9YgMoJa9dkOYzTUtLoKgkV6XIKYiMc=";
   };
 
   cargoHash = "sha256-axqFE5ZEiVP8PzFTtW5mbyyYcR4q9g3LX/0i6y+cgy8=";
