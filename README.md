@@ -41,7 +41,7 @@ nix run github:argosnothing/noogle-search
 { inputs, pkgs, ... }:
 {
   environment.systemPackages = [
-    inputs.noogle-search.packages.${pkgs.system}.default
+    inputs.noogle-search.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }
 ```
